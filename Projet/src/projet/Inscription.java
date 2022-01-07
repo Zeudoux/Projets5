@@ -2,9 +2,11 @@ package projet;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
+import java.util.*;
+import java.util.List;
 
+@SuppressWarnings("serial")
 public class Inscription extends JFrame implements ActionListener {
 	
 	private JPanel signinPanel = (JPanel) getContentPane();
@@ -18,12 +20,14 @@ public class Inscription extends JFrame implements ActionListener {
     private JTextField saisieNom = new JTextField();
     private JTextField saisiePrenom = new JTextField();
     private JTextField saisieId = new JTextField();
-    private JTextField saisieMdp = new JTextField();
-    private JTextField saisieConfirm = new JTextField();
+    private JPasswordField saisieMdp = new JPasswordField();
+    private JPasswordField saisieConfirm = new JPasswordField();
     private JButton valider = new JButton("Valider");
     private JButton retour = new JButton("Retour");
     private JCheckBox afficherMdp = new JCheckBox("Afficher le mot de passe");
-
+	
+    private List<String> champsDeSaisie = new ArrayList<>();
+    
     public Inscription() {
     	
     	this.setTitle("Inscription");
@@ -69,9 +73,55 @@ public class Inscription extends JFrame implements ActionListener {
     	afficherMdp.addActionListener(this);
     }
     
+    public void getAllTextField(Component... champs) {
+    	for(Component c : champs) {
+    		if(c instanceof JTextField)
+    			champsDeSaisie.add(((JTextField) c).getText());
+    		if(c instanceof JPasswordField) {
+    			char[] pswd;
+    			pswd = ((JPasswordField) c).getPassword();
+    			champsDeSaisie.add(String.valueOf(pswd));
+    		}	
+    	}
+    }
+    
+    public void valider() {
+    	if(champsDeSaisie.contains("")) {
+    		JOptionPane.showMessageDialog(this, "Un champ n'est pas rempli.");
+    	}else{
+    		this.setVisible(false);
+    		JOptionPane.showMessageDialog(this, "Inscription réussi !");
+			@SuppressWarnings("unused")
+			Connexion co = new Connexion();
+    	}
+    }
+    
+    public void retour() {
+    	this.setVisible(false);
+    	@SuppressWarnings("unused")
+        Connexion signin = new Connexion();
+    }
+    
+    public void affichageMdp() {
+    	if (afficherMdp.isSelected()) { 
+    		saisieMdp.setEchoChar((char) 0);
+    		saisieConfirm.setEchoChar((char) 0);
+    	}else{ 
+    		saisieMdp.setEchoChar('•'); 
+    		saisieConfirm.setEchoChar('•'); 
+    	}
+    }
+    
     @Override
     public void actionPerformed(ActionEvent action) {
-      
+        if (action.getSource() == valider) { valider(); }
+        
+        if (action.getSource() == retour) { retour(); }
+
+        if (action.getSource() == afficherMdp) { affichageMdp(); }
+
+
+
     }
 
 }
