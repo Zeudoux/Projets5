@@ -2,7 +2,6 @@ package projet;
 
 
 import javax.swing.*;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 
 public class Main{
@@ -16,7 +15,8 @@ public class Main{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Connexion mainGUI = new Connexion();
+                @SuppressWarnings("unused")
+				Connexion mainGUI = new Connexion();
             }
         });
 	}

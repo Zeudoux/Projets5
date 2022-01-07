@@ -2,10 +2,12 @@ package projet;
 
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.*;
 
 @SuppressWarnings("serial")
 public class Connexion extends JFrame implements ActionListener{
 	
+	private List<String> list = new ArrayList<>();
 	private JPanel logPanel = (JPanel) getContentPane();
     private JLabel titre = new JLabel("AUTHENTIFICATION");
     private JLabel identifiant = new JLabel("Identifiant");
@@ -84,7 +86,8 @@ public class Connexion extends JFrame implements ActionListener{
     		JOptionPane.showMessageDialog(this, "Veuillez saisir votre identifiant et votre mot de passe.");
     	if (id.equalsIgnoreCase(okId) && mdp.equalsIgnoreCase(okMdp)) {
     		this.setVisible(false);
-    		Messagerie chat = new Messagerie();
+    		@SuppressWarnings("unused")
+			Messagerie chat = new Messagerie();
     	} else if (!id.equalsIgnoreCase(okId) && mdp.equalsIgnoreCase(okMdp)){
     		JOptionPane.showMessageDialog(this, "Identifiant invalide...");
     		}else if (id.equalsIgnoreCase(okId) && !mdp.equalsIgnoreCase(okMdp)) {	
@@ -100,14 +103,15 @@ public class Connexion extends JFrame implements ActionListener{
  
     public void inscription() {
     	this.setVisible(false);
-    	Inscription signin = new Inscription();
+    	@SuppressWarnings("unused")
+		Inscription signin = new Inscription();
     }
     
     public void affichageMdp() {
     	if (afficherMdp.isSelected()) { 
     		saisieMdp.setEchoChar((char) 0);
     	}else{ 
-    		saisieMdp.setEchoChar('*'); 
+    		saisieMdp.setEchoChar('•'); 
     	}
     }  	
     

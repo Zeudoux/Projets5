@@ -109,7 +109,8 @@ public class Messagerie extends JFrame implements ActionListener{
     
     public void deco() {
     	this.setVisible(false);
-    	Connexion login = new Connexion();
+    	@SuppressWarnings("unused")
+		Connexion login = new Connexion();
     }
    
     public void actionPerformed(ActionEvent event) {
